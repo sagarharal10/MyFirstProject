@@ -1,0 +1,34 @@
+({
+    handleSelect : function(component, event, helper) {
+        helper.showModal(component,event,helper);
+    },
+
+    fireCompEvent : function(component, helper, action, payload) {
+        var compEvent = component.getEvent('interactionCompEvent');
+        compEvent.setParams({
+            'action' : action,
+            'payload': payload || null
+        });
+        compEvent.fire();
+    },
+
+    showModal : function(component, event, helper) {
+        var modal = component.find('modal');
+        modal.show();
+        console.log('MODal >>',modal);
+       // $A.util.removeClass(modal,'slds-hide');
+       // $A.util.addClass(modal,'slds-show');
+    },
+
+    hideModal : function(component, event, helper) {
+        var modal = component.find('modal');
+        modal.hide();
+        console.log('MODal >>',modal);
+        //$A.util.removeClass(modal,'slds-show');
+       // $A.util.addClass(modal,'slds-hide');
+    },
+	
+	deleteHandler: function( component, event, helper ) {
+        helper.fireCompEvent(component, helper, component.get( 'v.onselectAction' ), component.get( 'v.recordID' ));
+    }
+})
